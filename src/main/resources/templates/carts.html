@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Cakes Shop Service Website</title>
+  <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<style>
+  body
+  {
+    /*            background-image: url('https://wallpaperaccess.com/full/2029165.jpg');*/
+    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('https://cdn.jewelryimages.net/static/domains/jewelerstouch/images/store-pics/Vintage-Gold-Diamond-Engagement-Ring-Isolated-on-Black-Background.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+</style>
+<body>
+
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container" style="background-color:white; margin-top:30px; border-radius:25px;">
+  <h1 class="display-6">Cart</h1>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Photo</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cake : ${carts}">
+      <td><img th:src=" ${'../../images/' + cake.getCakes.name+ '.jpg'} " width="100">
+      </img></td>
+      <td th:text="${cake.getCakes().name}"></td>
+      <td th:text="${cake.getCakes().price}"></td>
+      <td th:text="${cake.getQuantity()}"></td>
+      <td>
+        <a th:href="@{/cart/remove/{id}(id=${cake.getCakes().id})}">
+          <button type="button" class="btn btn-primary">Delete</button>
+        </a>
+      </td>
+
+    </tr>
+    <h1 th:text="${'Total '+ priceCal +' Baht'}"></h1>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center">
+    <a  class="btn btn-primary" th:href="@{/order/list}" type="submit">Payment</a>
+  </div>
+  <div>
+    <a class="btn btn-primary" th:href="@{/cakes}">Back to shop</a>
+  </div>
+</div>
+</body>
+</html>
